@@ -1,8 +1,47 @@
 import React from 'react'
 
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Button } from '@mui/material';
+
 const SignUp = () => {
+    const [values,setValues]=useState({
+    Name:"",
+    email:"",
+    mobile:"",
+    gender:"",
+  })
+  const [error, setError] = useState("");
+  const navigate=useNavigate();
+
+  const handleChange=(e)=>{
+    setValues({...values,[e.target.name]:e.target.value});
+  }
+  const validateEmail = (email) => {
+    // return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    return /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email);
+  }
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+     if(!validateEmail(values.email)){
+      setError("Only Gmail are allowed !");
+      return;
+     }
+      setValues({name:"",email:"",mobile:""});
+
+    //   add new user in firebase authentication
+//      try {
+//     const response= await addDoc(collection(DiBackbone,"users"),values)
+//     if(Response.id){
+//       navigate("/")
+//     }
+//    } catch (error) {
+//     console.log(error)
+//    } 
+  }
   return (
-    <div>
+   <div className='flex min-h-screen pb-25 items-center justify-center bg-sky-100 '>
         <div className='w-full max-w-md bg-cyan-200  p-8 shadow-lg rounded-lg'>
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           {" "}
@@ -92,11 +131,6 @@ const SignUp = () => {
             </div>
              </Link>
             <div>
-              {/* <Link to="/"> */}
-                {/* <Button variant="contained" color="secondary">
-                  Back
-                </Button> */}
-              {/* </Link> */}
             </div>
           </div>
 

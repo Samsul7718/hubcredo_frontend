@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 
 const HomePage = () => {
   return (
-    <div className='w-full h-full flex flex-col '>
+    <div className='w-full h-full flex flex-col gap-10'>
         <div>
             <div className='w-full'>
                 <Navbar/>
