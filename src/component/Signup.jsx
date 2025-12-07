@@ -3,11 +3,13 @@ import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
+import axios from "axios";
 
 const SignUp = () => {
     const [values,setValues]=useState({
-    Name:"",
+    name:"",
     email:"",
+    password:"",
     mobile:"",
     gender:"",
   })
@@ -28,9 +30,28 @@ const SignUp = () => {
       setError("Only Gmail are allowed !");
       return;
      }
-      setValues({name:"",email:"",mobile:""});
+     
+     //   add new user in mongodb 
+     try{
+       const response=await axios.post("http://localhost:3000/signup",values);
+  //       const payload = response.data?.payload;
+  // if (!payload) throw new Error("Payload missing!");
+       alert(response.data.message);
+       setValues({name:"",email:"",mobile:"",password:"",gender:""});
+       navigate("/");
+const result = await axios.post(
+  "https://admin167.app.n8n.cloud/webhook/46f6a3bf-41e2-414e-87ae-4d4b64fb96a0",
+  {
+    email: values.email,
+    name: values.name
+  }
+);
 
-    //   add new user in firebase authentication
+console.log("Webhook triggered:", result.data);
+
+    }catch(error){
+      console.log(error.response.data.message);
+    }
 //      try {
 //     const response= await addDoc(collection(DiBackbone,"users"),values)
 //     if(Response.id){
@@ -54,9 +75,9 @@ const SignUp = () => {
             </label>
              <input 
              type="text" 
-             name="Name" 
+             name="name" 
              onChange={handleChange}
-             value={values.Name}
+             value={values.name}
              className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 capitalize" 
              placeholder='Enter your name'
              required
@@ -81,10 +102,24 @@ const SignUp = () => {
           </div>
             <div className='mb-2'>
             <label className='text-gray-700 font-medium mb-1'>
+                Password :
+            </label>
+             <input 
+             type="password" 
+             name="password" 
+             onChange={handleChange}
+             value={values.password}
+             className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 capitalize" 
+             placeholder='Enter your password'
+             required
+             />
+          </div>
+            <div className='mb-2'>
+            <label className='text-gray-700 font-medium mb-1'>
                 Mobile :
             </label>
              <input 
-             type="number" 
+             type="mobile" 
              name="mobile" 
              onChange={handleChange}
              value={values.mobile}
@@ -98,7 +133,7 @@ const SignUp = () => {
                 Gender :
             </label>
              <select 
-             type="text" 
+             type="gender" 
              name="gender" 
              onChange={handleChange}
              value={values.gender}
@@ -125,7 +160,7 @@ const SignUp = () => {
               Continue
             </Button>
             <h6>or</h6>
-            <Link to="/login">
+            <Link to="/">
             <div className='bg-white p-2 rounded-lg px-2 w-18 hover:bg-yellow-100'>
               <span className='!text-yellow '>Login</span>
             </div>

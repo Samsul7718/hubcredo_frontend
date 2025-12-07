@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { Button } from '@mui/material'
 import { Link,useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+import axios from "axios";
 
-const Login = () => {
+const Login = ({onLogin}) => {
   const [values,setValues]=useState({
     email:"",
-    mobile:"",
+    password:"",
     
   })
+  const {setIsLoggedIn}=useAuth()
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -21,11 +24,30 @@ const Login = () => {
      e.preventDefault();
      if(!validateEmail(values.email)){
       setError("Only Gmail are allowed !");
+      
       return;
      }
-     setValues({name:"",email:"",mobile:""})
+     try {
+       const res = await axios.post("http://localhost:3000/login", values);
+       localStorage.setItem("token", res.data.token); // store token
+       alert(res.data.message);
+       onLogin(res.data.user); // pass user to parent
+       setIsLoggedIn(true);
+       
+       setValues({email:"",password:""})
+       
+       navigate("/"); 
+
+      } catch (err) {
+      alert(err.response.data.message);
+    }
      console.log("values",values)
 
+    
+    //  const handleLogin=(e)=>{
+    //     setIsLoggedIn(true);
+    //     navigate("/home"); 
+    //  }
     //  Add new user to firebase
 //    try {
 //     const response= await addDoc(collection(DiBackbone,"users"),values)
@@ -66,15 +88,15 @@ const Login = () => {
           </div>
             <div className='mb-2'>
             <label className='text-gray-700 font-medium mb-1'>
-                Mobile :
+                Password :
             </label>
              <input 
-             type="number" 
-             name="mobile" 
+             type="password" 
+             name="password" 
              onChange={handleChange}
-             value={values.mobile}
+             value={values.password}
              className="w-full border rounded-lg px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500 capitalize" 
-             placeholder='Enter your mobile number'
+             placeholder='Enter your password'
              required
              />
           </div>
@@ -84,6 +106,7 @@ const Login = () => {
             <Button
               variant="contained"
               type="submit"
+              //  onClick={handleLogin}
               className="w-[60%] !text-black py-5 px-2 rounded-lg !bg-yellow-300 hover:!bg-yellow-500 transition duration-200"
             >
               Continue
@@ -104,4 +127,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;

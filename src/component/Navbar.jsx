@@ -11,7 +11,7 @@ const Navbar = () => {
         
         <div className='flex flex-cols justify-center items-center gap-20'>
           <Link
-          to="/login"
+          to="/"
           >
             <button className='bg-yellow-500 p-4 px-8 cursor-pointer rounded-md shadow-lg'>Login</button>
           
