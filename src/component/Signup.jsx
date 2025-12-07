@@ -33,7 +33,7 @@ const SignUp = () => {
      
      //   add new user in mongodb 
      try{
-       const response=await axios.post("https://hubcredo-frontend-kappa.vercel.app/signup",values);
+       const response=await axios.post("http://localhost:3000/signup",values);
   //       const payload = response.data?.payload;
   // if (!payload) throw new Error("Payload missing!");
        alert(response.data.message);
