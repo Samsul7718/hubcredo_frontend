@@ -28,7 +28,7 @@ const Login = ({onLogin}) => {
       return;
      }
      try {
-       const res = await axios.post("http://localhost:3000/login", values);
+       const res = await axios.post("https://hubcredo-frontend-kappa.vercel.app/login", values);
        localStorage.setItem("token", res.data.token); // store token
        alert(res.data.message);
        onLogin(res.data.user); // pass user to parent
