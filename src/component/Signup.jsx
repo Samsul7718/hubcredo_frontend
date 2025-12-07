@@ -33,7 +33,7 @@ const SignUp = () => {
      
      //   add new user in mongodb 
      try{
-       const response=await axios.post("http://localhost:3000/signup",values);
+       const response=await axios.post(`${import.meta.env.VITE_API_URL}/signup`,values);
   //       const payload = response.data?.payload;
   // if (!payload) throw new Error("Payload missing!");
        alert(response.data.message);
