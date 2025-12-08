@@ -39,13 +39,13 @@ const SignUp = () => {
        alert(response.data.message);
        setValues({name:"",email:"",mobile:"",password:"",gender:""});
        navigate("/");
-const result = await axios.post(
-  "https://admin167.app.n8n.cloud/webhook/46f6a3bf-41e2-414e-87ae-4d4b64fb96a0",
-  {
-    email: values.email,
-    name: values.name
-  }
-);
+// const result = await axios.post(
+//   "https://admin167.app.n8n.cloud/webhook/46f6a3bf-41e2-414e-87ae-4d4b64fb96a0",
+//   {
+//     email: values.email,
+//     name: values.name
+//   }
+// );
 
 console.log("Webhook triggered:", result.data);
 
