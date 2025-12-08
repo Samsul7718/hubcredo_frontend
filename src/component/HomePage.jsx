@@ -10,7 +10,7 @@ const HomePage = () => {
     // const {addToCart}=useCart()
 
     useEffect(()=>{
-        fetch(`${import.meta.env.VITE_API_URL}/api/product`)
+        fetch(`${import.meta.env.VITE_API_URL}/product`)
         .then(res=>res.json())
         .then(data=>setProducts(data))
         .catch(err=>console.log(err));
