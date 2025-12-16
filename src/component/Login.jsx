@@ -28,7 +28,7 @@ const Login = ({onLogin}) => {
       return;
      }
      try {
-       const res = await axios.post(`${import.meta.env.VITE_API_URL}/login`, values);
+       const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/login`, values);
        localStorage.setItem("token", res.data.token); // store token
        alert(res.data.message);
        onLogin(res.data.user); // pass user to parent
