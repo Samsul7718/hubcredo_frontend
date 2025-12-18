@@ -27,7 +27,7 @@ const SignUp = () => {
   const handleSubmit=async(e)=>{
     e.preventDefault();
      if(!validateEmail(values.email)){
-      setError("Only Gmail are allowed !");
+      setError("Only Gmail are allowed !..");
       return;
      }
      
