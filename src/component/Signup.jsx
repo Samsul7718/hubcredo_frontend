@@ -50,14 +50,7 @@ console.log("Webhook triggered:", result.data);
     }catch(error){
       console.log(error.response.data.message);
     }
-//      try {
-//     const response= await addDoc(collection(DiBackbone,"users"),values)
-//     if(Response.id){
-//       navigate("/")
-//     }
-//    } catch (error) {
-//     console.log(error)
-//    } 
+
   }
   return (
    <div className='flex min-h-screen pb-25 items-center justify-center bg-sky-100 '>
