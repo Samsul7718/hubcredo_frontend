@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 
 const HomePage = () => {
     const [products,setProducts]=useState([])
+    
     // const Navigate=useNavigate();
     // const {addToCart}=useCart()
 
